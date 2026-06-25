@@ -28,9 +28,14 @@ describe("parseDate", () => {
 });
 
 describe("escapeMarkdown", () => {
-  it("escapes special characters", () => {
+  it("escapes legacy Markdown special characters only", () => {
     expect(escapeMarkdown("hello_world")).toBe("hello\\_world");
-    expect(escapeMarkdown("test.name")).toBe("test\\.name");
+    expect(escapeMarkdown("test*name")).toBe("test\\*name");
+    expect(escapeMarkdown("test.name")).toBe("test.name");
+    expect(escapeMarkdown("example@example.com")).toBe("example@example.com");
+    expect(escapeMarkdown("Mozilla/5.0 (Windows NT 10.0)")).toBe(
+      "Mozilla/5.0 (Windows NT 10.0)"
+    );
   });
 });
 

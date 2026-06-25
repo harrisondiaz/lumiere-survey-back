@@ -1,5 +1,6 @@
+/** Escape dynamic text for Telegram legacy Markdown (not MarkdownV2). */
 export function escapeMarkdown(text: string): string {
-  return text.replace(/([_*[\]()~`>#+\-=|{}.!\\])/g, "\\$1");
+  return text.replace(/([_*[`\[])/g, "\\$1");
 }
 
 export function parseDate(input: string): Date | null {
