@@ -1,0 +1,27 @@
+# Render Blueprint — backend with persistent SQLite disk
+# Docs: https://render.com/docs/disks
+services:
+  - type: web
+    name: lumiere-survey-back
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: starter
+    healthCheckPath: /health
+    disk:
+      name: sqlite-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: DATABASE_URL
+        value: file:/data/lumiere.db
+      - key: NODE_ENV
+        value: production
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
+      - key: API_KEY
+        generateValue: true
+      - key: CORS_ORIGIN
+        sync: false
